@@ -44,13 +44,16 @@ void Manager::initialize(){
     std::cin>>max_horarios;
     std::cout<<"Por favor, digite o número máximo de salas (0 caso não queira limitar): ";
     std::cin>>max_salas;
-    std::cout<<"Qual dos dois (defult: horários) você gostaria de minimizar? ";
+    std::cout<<"Gostaria de minimizar horários ou salas? (default: horários)\n";
     std::cin>>mini;
     for(auto& i : mini) i = std::tolower(i);
     if(mini == "salas" || mini == "sala") minimize_rooms = true;
 };
 
-
+/**
+ * @brief The method that actually solves the problem
+ * and shows the solution obtained
+ */
 void Manager::solve(){
     welsh_powell();
     display_solution();
@@ -67,15 +70,22 @@ void Manager::display_initialization(){
              <<"Por favor, digite o caminho para o arquivo: ";
 };
 
-
+/**
+ * @brief Displays the table with the solution obtained
+ */
 void Manager::display_solution(){
     if(!found_solution){
         std::cout<<"Ops! Não conseguimos encontrar uma solução para o seu problema :("<<std::endl;
         return;
     }
+    //STUB
+    print_graph(grafo);
 };
 
-
+/**
+ * @brief Algorythm used to color our graph
+ * according to the restrictions given
+ */
 void Manager::welsh_powell(){
 
 };

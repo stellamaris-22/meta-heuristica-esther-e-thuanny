@@ -14,7 +14,7 @@ class Manager{
         std::vector<std::vector<bool>> grafo;   //!< Matriz de adjacência (grafo recebido)
         unsigned short max_horarios{0};         //!< Limite de horários (0 caso não haja limite)
         unsigned short max_salas{0};            //!< Limite de salas (0 caso não haja limite)
-        std::vector<std::vector<int>> solucao;  //!< Solução gerada
+        std::vector<std::vector<int>> solucao;  //!< Solução gerada (double-check type)
         unsigned short horarios_usados{0};      //!< Número de horários usados na solução
         unsigned short salas_usadas{0};         //!< Número de salas usadas na solução
         bool found_solution{false};             //!< Se foi ou não encontrada uma solução para aquele problema
