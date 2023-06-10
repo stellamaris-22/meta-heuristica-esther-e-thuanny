@@ -11,7 +11,8 @@
  */
 class Manager{
     private: 
-        std::vector<std::vector<int>> grafo;   //!< Matriz de adjacência (grafo recebido)
+    //just a thought: how about a pair of int, vector? <label, vertices linked>?
+        std::vector<std::vector<int>> grafo;    //!< Matriz de adjacência (grafo recebido)
         unsigned short max_horarios{0};         //!< Limite de horários (0 caso não haja limite)
         unsigned short max_salas{0};            //!< Limite de salas (0 caso não haja limite)
         std::vector<std::vector<int>> solucao;  //!< Solução gerada (double-check type)
@@ -35,7 +36,5 @@ class Manager{
         void display_solution();
         /// Welsh-Powell algorythm execution
         void welsh_powell();
-
-        static bool comp(std::vector<int> a, std::vector<int> b){ return a.size() > b.size(); };
 };
 #endif

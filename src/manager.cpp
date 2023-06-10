@@ -85,18 +85,17 @@ void Manager::display_solution(){
     print_graph(grafo);
 };
 
-// bool Manager::comp(std::vector<int> a, std::vector<int> b){
-//     return a.size() > b.size();
-// };
-
 /*
  * Checks wether or not the intersection between two 
  * sorted vectors is empty
  */
 template <typename T>
 bool empty_intersection(std::vector<T> a, std::vector<T> b){
+    //loops through both vectors (O(n1+n2))
     for(auto i1{0u}, i2{0u}; i1 < a.size() && i2 < b.size();){
+        //if there is a common element
         if(a[i1] == b[i2]) return false;
+        //advance index on the vector with smallest element
         else if(a[i1] < b[i2]) ++i1;
         else if(a[i1] > b[i2]) ++i2;
     }
@@ -108,21 +107,24 @@ bool empty_intersection(std::vector<T> a, std::vector<T> b){
  * according to the restrictions given  
  */
 void Manager::welsh_powell(){
+    //wether or not a certain vertex was colored
     bool colored;
-    //sorting vertices based on their degree
-    std::sort(grafo.begin(), grafo.end(), comp);
+    //sorting vertices based on their degree (O(n log n))
+    std::sort(grafo.begin(), grafo.end(), [](std::vector<int> a, std::vector<int> b){ return (a.size() > b.size()); });
     //if we defined a maximum
     auto n_cores = minimize_rooms ? (max_salas ? max_salas : grafo.size()) : (max_horarios ? max_horarios : grafo.size());
+    
     //creates every color partition
     for(auto i{0u}; i<n_cores; ++i) solucao.emplace_back();
     //first vertex (0) goes to first color
     solucao[0].push_back(0);
-    //for each uncolored vertex
+    //for each uncolored vertex (O(n))
     for(auto i{1u}; i<grafo.size(); ++i){
+        //each one starts as non-colored
         colored = false;
-        //for every color partition
+        //for every color partition (O(n))
         for(auto& j : solucao){ 
-            //if this color's adjacent vertices aren't already in color j
+            //if this color's adjacent vertices aren't already in color j (O(n))
             if(empty_intersection(grafo[i], j)){
                 colored = true;
                 //color i in j
@@ -131,11 +133,14 @@ void Manager::welsh_powell(){
                 break;
             }
         }
+        //if a certain vertex could not be colored, there is no solution
         if(!colored){
             found_solution = false;
             return;
         }
     }
+    //if it got here, we could color all vertexes
+    found_solution = true;
 };
 
 
