@@ -21,7 +21,7 @@ void print_graph(std::vector<std::vector<T>> vec){
  */
 Parser::Parser(int idx){
     update_grafo(idx);
-    print_graph(grafo);
+    // print_graph(grafo);
 }
 
 /**
@@ -85,4 +85,8 @@ void Parser::update_grafo(int idx){
         //if it's undefined
         else continue;
     }
+}
+
+std::vector<std::vector<int>> Parser::get_grafo(){
+    return grafo;
 }

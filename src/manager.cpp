@@ -4,6 +4,7 @@
 #include <fstream>
 #include <algorithm>
 #include "manager.h"
+#include "parser.h"
 
 //purely to debug stuff
 template <typename T>
@@ -22,23 +23,26 @@ void print_graph(std::vector<std::vector<T>> vec){
  */
 void Manager::initialize(){
     /// variables
-    int lin{0};
+    // int lin{0};
 
     // display_initialization();
+    //index of test case
     // auto idx{0};
     // std::cin>>idx;
     Parser p(1);
     grafo = p.get_grafo();
 
+
+
     //Prompts for maximum times & maximum classrooms & minimization thing
-    std::cout<<"Por favor, digite o número máximo de horários (0 caso não queira limitar): ";
-    std::cin>>max_horarios;
-    std::cout<<"Por favor, digite o número máximo de salas (0 caso não queira limitar): ";
-    std::cin>>max_salas;
-    std::cout<<"Gostaria de minimizar horários ou salas? (default: horários)\n";
-    std::cin>>mini;
-    for(auto& i : mini) i = std::tolower(i);
-    if(mini == "salas" || mini == "sala") minimize_rooms = true;
+    // std::cout<<"Por favor, digite o número máximo de horários (0 caso não queira limitar): ";
+    // std::cin>>max_horarios;
+    // std::cout<<"Por favor, digite o número máximo de salas (0 caso não queira limitar): ";
+    // std::cin>>max_salas;
+    // std::cout<<"Gostaria de minimizar horários ou salas? (default: horários)\n";
+    // std::cin>>mini;
+    // for(auto& i : mini) i = std::tolower(i);
+    // if(mini == "salas" || mini == "sala") minimize_rooms = true;
 };
 
 /**
@@ -71,7 +75,7 @@ void Manager::display_solution(){
         return;
     }
     //STUB
-    print_graph(grafo);
+    print_graph(solucao);
 };
 
 /*
@@ -101,12 +105,13 @@ void Manager::welsh_powell(){
     //sorting vertices based on their degree (O(n log n))
     std::sort(grafo.begin(), grafo.end(), [](std::vector<int> a, std::vector<int> b){ return (a.size() > b.size()); });
     //if we defined a maximum
-    auto n_cores = minimize_rooms ? (max_salas ? max_salas : grafo.size()) : (max_horarios ? max_horarios : grafo.size());
+    // auto n_cores = minimize_rooms ? (max_salas ? max_salas : grafo.size()) : (max_horarios ? max_horarios : grafo.size());
+    auto n_cores{grafo.size()};
     
     //creates every color partition
     for(auto i{0u}; i<n_cores; ++i) solucao.emplace_back();
     //first vertex (0) goes to first color
-    solucao[0].push_back(0);
+    solucao[0].push_back(1);
     //for each uncolored vertex (O(n))
     for(auto i{1u}; i<grafo.size(); ++i){
         //each one starts as non-colored
@@ -129,7 +134,7 @@ void Manager::welsh_powell(){
         }
     }
     //if it got here, we could color all vertexes
-    found_solution = true;
+    found_solution = true; 
 };
 
 

@@ -12,6 +12,8 @@ void print_graph(std::vector<std::vector<T>> vec){
 }
 
 int main(){
-    
+    Manager m;
+    m.initialize();
+    m.solve();
 
 }

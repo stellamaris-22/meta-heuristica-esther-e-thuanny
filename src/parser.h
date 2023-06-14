@@ -17,11 +17,11 @@ class Parser{
     public:
         /// Builds a new parser
         Parser(int);
+        std::vector<std::vector<int>> get_grafo();
     private:
         /// Screen with commands for users to put a file to solve the problem
         void read();
         /// Screen with our final table
-        void get_grafo();
         /// Tokenizes each line of .col document
         std::vector<std::string> tokenizer(std::string, char=' ');
     public:
