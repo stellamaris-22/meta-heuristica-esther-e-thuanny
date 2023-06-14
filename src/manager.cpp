@@ -22,24 +22,13 @@ void print_graph(std::vector<std::vector<T>> vec){
  */
 void Manager::initialize(){
     /// variables
-    std::string file_name, line,  mini;
-    std::fstream file;
     int lin{0};
 
-    /// opens file
-    display_initialization();
-    std::getline(std::cin, file_name);
-    file.open(file_name);
-
-    /// reads file
-    while(std::getline(file, line)){
-        //updates amount of lines in graph
-        grafo.emplace_back();
-        for(auto i : line){
-            if(i == '0' || i == '1') grafo[lin].push_back(i == '1');
-        }
-        ++lin;
-    }
+    // display_initialization();
+    // auto idx{0};
+    // std::cin>>idx;
+    Parser p(1);
+    grafo = p.get_grafo();
 
     //Prompts for maximum times & maximum classrooms & minimization thing
     std::cout<<"Por favor, digite o número máximo de horários (0 caso não queira limitar): ";

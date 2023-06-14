@@ -8,7 +8,7 @@
 
 /**
  * This class is responsible for parsing
- * a .col file (.col.b is still a wip)
+ * a .col file
  */
 class Parser{
     private: 
