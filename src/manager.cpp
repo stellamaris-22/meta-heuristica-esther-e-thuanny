@@ -4,6 +4,7 @@
 #include <fstream>
 #include <algorithm>
 #include "manager.h"
+#include "parser.h"
 
 //purely to debug stuff
 template <typename T>
