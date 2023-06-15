@@ -7,7 +7,7 @@ template <typename T>
 void print_graph(std::vector<std::vector<T>> vec){
     for(const auto& i : vec){
             for(const auto& j : i){
-            std::cout<<j<<' ';
+            std::cout<<j+1<<' ';
         }
         std::cout<<std::endl;
     }
@@ -60,7 +60,6 @@ void Parser::update_grafo(int idx){
     file_name = "test_graph.txt"; //it'll be based off of idx later
     std::string line;
     std::vector<std::string> broken_line;
-    int n_vertices;
     std::fstream file;
     file.open(file_name);
 
@@ -71,22 +70,32 @@ void Parser::update_grafo(int idx){
         //if it's the problem description
         else if(broken_line[0] == "p") {
             n_vertices = std::stoi(broken_line[2]);
-            // n_edges = std::stoi(broken_line[3]); i won't really need it, will I?
-            for(auto i{0}; i<n_vertices; ++i){
+            n_edges = std::stoi(broken_line[3]); 
+            for(auto i{0}; i<=n_vertices; ++i){
                 grafo.emplace_back();
+                grafo[i].push_back(i);
             }
         }
         //if it's an edge
         else if(broken_line[0] == "e"){
             //adds the each vertex in the other's list
-            grafo[std::stoi(broken_line[2])-1].push_back(std::stoi(broken_line[1]));
-            grafo[std::stoi(broken_line[1])-1].push_back(std::stoi(broken_line[2]));
+            grafo[std::stoi(broken_line[2])].push_back(std::stoi(broken_line[1]));
+            grafo[std::stoi(broken_line[1])].push_back(std::stoi(broken_line[2]));
         }
         //if it's undefined
         else continue;
     }
+    // print_graph(grafo);
 }
 
 std::vector<std::vector<int>> Parser::get_grafo(){
     return grafo;
+}
+
+int Parser::get_vertices(){
+    return n_vertices;
+}
+
+int Parser::get_edges(){
+    return n_edges;
 }

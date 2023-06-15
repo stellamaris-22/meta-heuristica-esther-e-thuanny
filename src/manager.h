@@ -21,6 +21,7 @@ class Manager{
         unsigned short salas_usadas{0};             //!< Número de salas usadas na solução
         bool found_solution{false};                 //!< Se foi ou não encontrada uma solução para aquele problema
         bool minimize_rooms{false};                 //!< O que estamos minimizando: salas (true) ou horários (false)
+        int n_colors;
         //Can't think of anything else for now
         //Maybe Color Partitions...? Nah
     public:
@@ -30,6 +31,8 @@ class Manager{
         void initialize();
         /// Solves timetabling problem asked & prints solution
         void solve();
+        
+        int get_colors();
     private:
         /// Screen with commands for users to put a file to solve the problem
         void display_initialization();

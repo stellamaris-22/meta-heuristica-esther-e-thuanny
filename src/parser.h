@@ -14,6 +14,8 @@ class Parser{
     private: 
         std::vector<std::vector<int>> grafo;    //!< Matriz gerada pelo grafo recebido
         std::string file_name;                  //!< To open the test file
+        int n_vertices;                         //!< Number of vertices
+        int n_edges;                            //!< Number of edges
     public:
         /// Builds a new parser
         Parser(int);
@@ -21,7 +23,8 @@ class Parser{
     private:
         /// Screen with commands for users to put a file to solve the problem
         void read();
-        /// Screen with our final table
+        int get_vertices();
+        int get_edges();
         /// Tokenizes each line of .col document
         std::vector<std::string> tokenizer(std::string, char=' ');
     public:

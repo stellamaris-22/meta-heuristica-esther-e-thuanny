@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <algorithm>
+#include <unordered_map>
 #include "manager.h"
 #include "parser.h"
 
@@ -10,10 +11,10 @@
 template <typename T>
 void print_graph(std::vector<std::vector<T>> vec){
     for(const auto& i : vec){
-            for(const auto& j : i){
+        for(const auto& j : i){
             std::cout<<j<<' ';
         }
-        std::cout<<std::endl;
+        if(!i.empty())std::cout<<std::endl;
     }
 }
 
@@ -22,27 +23,8 @@ void print_graph(std::vector<std::vector<T>> vec){
  * and its restrictions as requested by the user
  */
 void Manager::initialize(){
-    /// variables
-    // int lin{0};
-
-    // display_initialization();
-    //index of test case
-    // auto idx{0};
-    // std::cin>>idx;
     Parser p(1);
     grafo = p.get_grafo();
-
-
-
-    //Prompts for maximum times & maximum classrooms & minimization thing
-    // std::cout<<"Por favor, digite o número máximo de horários (0 caso não queira limitar): ";
-    // std::cin>>max_horarios;
-    // std::cout<<"Por favor, digite o número máximo de salas (0 caso não queira limitar): ";
-    // std::cin>>max_salas;
-    // std::cout<<"Gostaria de minimizar horários ou salas? (default: horários)\n";
-    // std::cin>>mini;
-    // for(auto& i : mini) i = std::tolower(i);
-    // if(mini == "salas" || mini == "sala") minimize_rooms = true;
 };
 
 /**
@@ -51,8 +33,12 @@ void Manager::initialize(){
  */
 void Manager::solve(){
     welsh_powell();
-    display_solution();
+    // display_solution();
 };
+
+int Manager::get_colors(){
+    return n_colors;
+}
 
 /**
  * Prompts user for file with graph, explains format asked in file
@@ -102,16 +88,18 @@ bool empty_intersection(std::vector<T> a, std::vector<T> b){
 void Manager::welsh_powell(){
     //wether or not a certain vertex was colored
     bool colored;
+
     //sorting vertices based on their degree (O(n log n))
-    std::sort(grafo.begin(), grafo.end(), [](std::vector<int> a, std::vector<int> b){ return (a.size() > b.size()); });
+    std::sort(grafo.begin(), grafo.end(), [](const std::vector<int>& a, const std::vector<int>& b) {return a.size() > b.size();});
+    
     //if we defined a maximum
-    // auto n_cores = minimize_rooms ? (max_salas ? max_salas : grafo.size()) : (max_horarios ? max_horarios : grafo.size());
     auto n_cores{grafo.size()};
+    n_colors = 0;
     
     //creates every color partition
     for(auto i{0u}; i<n_cores; ++i) solucao.emplace_back();
-    //first vertex (0) goes to first color
-    solucao[0].push_back(1);
+    //first vertex goes to first color
+    solucao[0].push_back(0);
     //for each uncolored vertex (O(n))
     for(auto i{1u}; i<grafo.size(); ++i){
         //each one starts as non-colored
@@ -119,11 +107,20 @@ void Manager::welsh_powell(){
         //for every color partition (O(n))
         for(auto& j : solucao){ 
             //if this color's adjacent vertices aren't already in color j (O(n))
-            if(empty_intersection(grafo[i], j)){
+            bool canColor = true;
+            
+            // Verifica se o vértice i pode ser colorido com a cor atual
+            for (auto v : j) {
+                if (!empty_intersection(grafo[i], grafo[v])) {
+                    canColor = false;
+                    break;
+                }
+            }
+
+            if (canColor) {
+                ++n_colors;
                 colored = true;
-                //color i in j
                 j.push_back(i);
-                //analyze next vertex
                 break;
             }
         }
@@ -136,6 +133,3 @@ void Manager::welsh_powell(){
     //if it got here, we could color all vertexes
     found_solution = true; 
 };
-
-
-
