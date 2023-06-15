@@ -11,8 +11,6 @@
  */
 class Manager{
     private: 
-    //just a thought: how about a pair of int, vector? <label, vertices linked>?
-        // std::pair<int,*std::vector<int>> addresses; //|< Keeps the adresses of each vertex's list
         std::vector<std::vector<int>> grafo;        //!< Matriz de adjacência (grafo recebido)
         unsigned short max_horarios{0};             //!< Limite de horários (0 caso não haja limite)
         unsigned short max_salas{0};                //!< Limite de salas (0 caso não haja limite)
@@ -21,9 +19,9 @@ class Manager{
         unsigned short salas_usadas{0};             //!< Número de salas usadas na solução
         bool found_solution{false};                 //!< Se foi ou não encontrada uma solução para aquele problema
         bool minimize_rooms{false};                 //!< O que estamos minimizando: salas (true) ou horários (false)
-        int n_colors;
-        //Can't think of anything else for now
-        //Maybe Color Partitions...? Nah
+        int n_colors;                               //!< Número de cores utilizadas
+        int n_vertices;                             //!< Número de vértices no grafo
+        int n_arestas;                              //!< Número de arestas no grafo
     public:
         /// Builds a new manager
         Manager()=default;
@@ -34,6 +32,8 @@ class Manager{
         void solve();
         
         int get_colors();
+        int get_vertices();
+        int get_arestas();
     private:
         /// Screen with commands for users to put a file to solve the problem
         void display_initialization();

@@ -25,6 +25,8 @@ void print_graph(std::vector<std::vector<T>> vec){
 void Manager::initialize(){
     Parser p(1);
     grafo = p.get_grafo();
+    n_vertices = p.get_vertices();
+    n_arestas = p.get_edges();
 };
 
 /**
@@ -34,7 +36,16 @@ void Manager::initialize(){
 void Manager::initialize(std::string file_name){
     Parser p(file_name);
     grafo = p.get_grafo();
+    n_arestas = p.get_edges();
+    n_vertices = p.get_vertices();
 };
+
+int Manager::get_vertices(){
+    return n_vertices;
+}
+int Manager::get_arestas(){
+    return n_arestas;
+}
 
 /**
  * @brief The method that actually solves the problem
@@ -104,7 +115,6 @@ void Manager::welsh_powell(){
     //if we defined a maximum
     auto n_cores{grafo.size()};
     n_colors = 0;
-    
     //creates every color partition
     for(auto i{0u}; i<n_cores; ++i) solucao.emplace_back();
     //first vertex goes to first color
@@ -127,8 +137,8 @@ void Manager::welsh_powell(){
             }
 
             if (canColor) {
-                ++n_colors;
                 colored = true;
+                if(j.empty()) ++n_colors;
                 j.push_back(i);
                 break;
             }
