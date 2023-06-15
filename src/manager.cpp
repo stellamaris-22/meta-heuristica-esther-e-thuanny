@@ -28,6 +28,15 @@ void Manager::initialize(){
 };
 
 /**
+ * This function is responsible for initializing our graph
+ * and its restrictions as requested by the user
+ */
+void Manager::initialize(std::string file_name){
+    Parser p(file_name);
+    grafo = p.get_grafo();
+};
+
+/**
  * @brief The method that actually solves the problem
  * and shows the solution obtained
  */

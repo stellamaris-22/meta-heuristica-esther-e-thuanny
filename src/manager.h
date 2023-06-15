@@ -29,6 +29,7 @@ class Manager{
         Manager()=default;
         /// Initializes our graph and restrictions
         void initialize();
+        void initialize(std::string);
         /// Solves timetabling problem asked & prints solution
         void solve();
         

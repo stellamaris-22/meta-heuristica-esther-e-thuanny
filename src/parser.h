@@ -19,6 +19,7 @@ class Parser{
     public:
         /// Builds a new parser
         Parser(int);
+        Parser(std::string);
         std::vector<std::vector<int>> get_grafo();
         int get_vertices();
         int get_edges();

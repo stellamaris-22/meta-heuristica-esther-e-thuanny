@@ -21,7 +21,17 @@ void print_graph(std::vector<std::vector<T>> vec){
  */
 Parser::Parser(int idx){
     update_grafo(idx);
-    // print_graph(grafo);
+}
+
+/**
+ * @brief Construct a new Parser object
+ * 
+ * @param file_name the name of the test we'll be parsing 
+ * (Later it'll be updatable)
+ */
+Parser::Parser(std::string file_name){
+    this->file_name = file_name;
+    update_grafo(-1);
 }
 
 /**
@@ -57,7 +67,7 @@ std::vector<std::string> Parser::tokenizer(std::string str, char token){
  */
 void Parser::update_grafo(int idx){
     //Note: for now, idx is useless
-    file_name = "test_graph.txt"; //it'll be based off of idx later
+    if(idx > -1)file_name = "test_graph.txt"; //it'll be based off of idx later
     std::string line;
     std::vector<std::string> broken_line;
     std::fstream file;
@@ -85,7 +95,6 @@ void Parser::update_grafo(int idx){
         //if it's undefined
         else continue;
     }
-    // print_graph(grafo);
 }
 
 std::vector<std::vector<int>> Parser::get_grafo(){
