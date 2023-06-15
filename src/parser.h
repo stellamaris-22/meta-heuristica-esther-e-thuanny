@@ -20,11 +20,12 @@ class Parser{
         /// Builds a new parser
         Parser(int);
         std::vector<std::vector<int>> get_grafo();
+        int get_vertices();
+        int get_edges();
     private:
         /// Screen with commands for users to put a file to solve the problem
         void read();
-        int get_vertices();
-        int get_edges();
+        
         /// Tokenizes each line of .col document
         std::vector<std::string> tokenizer(std::string, char=' ');
     public:
