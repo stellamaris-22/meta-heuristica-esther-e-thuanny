@@ -26,6 +26,8 @@ class Manager{
         bool execute{false};                        //!< Se vamos ou não executar aquele teste
         std::string file_name;                      //!< Arquivo de onde tiraremos o teste
         std::chrono::milliseconds tempo;            //|< Duração do experimento
+                                           
+        int curr_idx;                               //!< Índice do teste sendo executado
     public:
         /// Builds a new manager
         Manager()=default;
@@ -38,6 +40,7 @@ class Manager{
         int get_colors();
         int get_vertices();
         int get_arestas();
+        bool all; //!< Se todos os testes serão executados
     private:
         /// Screen with commands for users to put a file to solve the problem
         void display_initialization();

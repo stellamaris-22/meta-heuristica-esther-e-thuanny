@@ -24,6 +24,7 @@ void print_graph(std::vector<std::pair<int,std::vector<T>>> vec){
  * and its restrictions as requested by the user
  */
 void Manager::initialize(){
+    solucao.clear();
     while(!execute) display_initialization();
     initialize(file_name);
 };
@@ -33,6 +34,7 @@ void Manager::initialize(){
  * and its restrictions as requested by the user
  */
 void Manager::initialize(std::string file_name){
+    solucao.clear();
     Parser p(file_name);
     grafo = p.get_grafo();
     n_arestas = p.get_edges();
@@ -69,7 +71,7 @@ int Manager::get_colors(){
  * and introduces problem and how its solved
  */
 void Manager::display_initialization(){
-    std::cout<<"Bem-vindo(a) ao nosso algoritmo de timetabling!\n"
+    std::cout<<"Bem-vindo(a) à nossa implementação do algoritmo de Welsh-Powell!\n"
              <<"\n1 - Casos de teste disponíveis\n"
              <<"2 - Referências dos casos de teste\n"
              <<"Por favor, digite qual dos dois gostaria de ver > ";
@@ -77,19 +79,33 @@ void Manager::display_initialization(){
     std::cin >> com;
     if(com == '1'){
         std::cout<<"\nNós temos 58 casos de teste disponíveis. Por este motivo, caso deseje mais detalhes sobre um \n"
-                 <<"deles ou deseje executar algum, digite um número de 1 a 58 > ";
+                 <<"deles ou deseje executar algum, digite um número de 1 a 58. Caso deseje executar todos os testes,\n"
+                 <<"digite 0 > ";
         int idx;
         std::cin >> idx;
-        Parser p(idx);
-        if(p.get_grafo().empty()) return;
-        file_name = p.get_file_name();
-        std::cout<<"\nNome do arquivo: "<<file_name<<std::endl;
-        std::cout<<"Número de vértices: "<<p.get_vertices()<<std::endl;
-        std::cout<<"Número de arestas: "<<p.get_vertices()<<std::endl;
-        std::cout<<"\nDeseja executar este teste? \n(Atenção: cada linha da saída representa uma cor)\n(A saída e o tempo gasto também ficarão registrados no arquivo \"result.txt\") [Y/n] > ";
-        char ex;
-        std::cin>>ex;
-        execute = (std::tolower(ex) != 'n');
+        if(idx){
+            Parser p(idx);
+            if(p.get_grafo().empty()) return;
+            file_name = p.get_file_name();
+            std::cout<<"\nNome do arquivo: "<<file_name<<std::endl;
+            std::cout<<"Número de vértices: "<<p.get_vertices()<<std::endl;
+            std::cout<<"Número de arestas: "<<p.get_vertices()<<std::endl;
+            std::cout<<"\nDeseja executar este teste? \n(Atenção: cada linha da saída representa uma cor)\n(A saída e o tempo gasto também ficarão registrados no arquivo \"result.txt\") [Y/n] > ";
+            char ex;
+            std::cin>>ex;
+            execute = (std::tolower(ex) != 'n');
+        } else {
+            all = true;
+            execute = true;
+            std::vector<std::string> file_names{"anna.col", "david.col", "fpsol2.i.1.col", "fpsol2.i.2.col", "fpsol2.i.3.col", "games120.col", "homer.col", "huck.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
+            curr_idx = 0;
+            for(const auto& i : file_names){
+                grafo.clear();
+                ++curr_idx;
+                initialize(i);
+                solve();
+            }
+        }
     } else {
         std::cout   <<"REG: (De Gary Lewandowski (gary@cs.wisc.edu)) Problema baseado na alocação de registros para variáveis em códigos reais.\n"
                     <<"LEI: (De Craig Morgenstern (morgenst@riogrande.cs.tcu.edu)) Grafos de Leighton com tamanho de coloração garantido. A referência\n"
@@ -136,7 +152,8 @@ void Manager::display_solution(){
         return;
     }
     std::ofstream out;
-    out.open("result.txt");
+    if(!all) out.open("results/result.txt");
+    else out.open("results/result" + std::to_string(curr_idx) + ".txt");
     for(const auto& i : solucao){
         for(const auto& j : i){
             std::cout<<j+1<<' ';

@@ -19,7 +19,7 @@ Todos os casos de teste foram tirados de https://mat.tepper.cmu.edu/COLOR/instan
 
 ## Saída
 
-A saída será dada por uma sequência de linhas não-vazias. Cada linha representa uma cor (ou sala) alocada para aquelas aulas. A linha será composta por vários números, que serão o código daquela aula. As aulas que ocorrerão na mesma sala estarão em horários distintos. Já cada coluna representará um horário, ou seja, todas as aulas de uma coluna ocorrerão simultaneamente. Assim, a saída representa uma tabela em que cada aula tem uma combinação única de sala e horário, de modo que não haverá outra aula alocada para a mesma sala no mesmo horário.
+A saída será dada por uma sequência de linhas não-vazias. Cada linha representa uma cor (ou sala) alocada para aquelas aulas. A linha será composta por vários números, que serão o código daquela aula. As aulas que ocorrerão na mesma sala estarão em horários distintos. Já cada coluna representará um horário, ou seja, todas as aulas de uma coluna ocorrerão simultaneamente. Assim, a saída representa uma tabela em que cada aula tem uma combinação única de sala e horário, de modo que não haverá outra aula alocada para a mesma sala no mesmo horário. Todas as saídas geradas são colocadas na pasta "results", contendo as partições, o tempo gasto em milissegundos e a quantidade de cores utilizada.
 
 ## Metodologia
 
