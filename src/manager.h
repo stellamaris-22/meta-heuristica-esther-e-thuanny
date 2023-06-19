@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <chrono>
 
 /**
  * This class is responsible for receiving a graph representing a timetable 
@@ -11,7 +12,7 @@
  */
 class Manager{
     private: 
-        std::vector<std::vector<int>> grafo;        //!< Matriz de adjacência (grafo recebido)
+        std::vector<std::pair<int,std::vector<int>>> grafo;        //!< Matriz de adjacência (grafo recebido)
         unsigned short max_horarios{0};             //!< Limite de horários (0 caso não haja limite)
         unsigned short max_salas{0};                //!< Limite de salas (0 caso não haja limite)
         std::vector<std::vector<int>> solucao;      //!< Solução gerada (double-check type)
@@ -22,6 +23,9 @@ class Manager{
         int n_colors;                               //!< Número de cores utilizadas
         int n_vertices;                             //!< Número de vértices no grafo
         int n_arestas;                              //!< Número de arestas no grafo
+        bool execute{false};                        //!< Se vamos ou não executar aquele teste
+        std::string file_name;                      //!< Arquivo de onde tiraremos o teste
+        std::chrono::milliseconds tempo;            //|< Duração do experimento
     public:
         /// Builds a new manager
         Manager()=default;
@@ -41,5 +45,6 @@ class Manager{
         void display_solution();
         /// Welsh-Powell algorythm execution
         void welsh_powell();
+        void clear();
 };
 #endif

@@ -4,10 +4,10 @@
 #include <string>
 
 template <typename T>
-void print_graph(std::vector<std::vector<T>> vec){
+void print_graph(std::vector<std::pair<int,std::vector<T>>> vec){
     for(const auto& i : vec){
-            for(const auto& j : i){
-            std::cout<<j+1<<' ';
+        for(const auto& j : i.second){
+            std::cout<<j<<' ';
         }
         std::cout<<std::endl;
     }
@@ -66,12 +66,19 @@ std::vector<std::string> Parser::tokenizer(std::string str, char token){
  * @param idx the index of the file to be read
  */
 void Parser::update_grafo(int idx){
-    //Note: for now, idx is useless
-    if(idx > -1)file_name = "test_graph.txt"; //it'll be based off of idx later
+    grafo.clear();
+    if(idx-1 > -1){
+        std::vector<std::string> file_names{"anna.col", "david.col", "fpsol2.i.1.col", "fpsol2.i.2.col", "fpsol2.i.3.col", "games120.col", "homer.col", "huck.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
+        file_name = file_names[idx-1];
+        std::cout<<file_name<<std::endl;
+    } else if(idx!=-1){
+        std::cout<<"Ops! Arquivo não encontrado :("<<std::endl;
+        return;
+    }
     std::string line;
     std::vector<std::string> broken_line;
     std::fstream file;
-    file.open(file_name);
+    file.open("src/test_lib/" + file_name);
 
     while(std::getline(file, line)){
         broken_line = tokenizer(line);
@@ -81,23 +88,25 @@ void Parser::update_grafo(int idx){
         else if(broken_line[0] == "p") {
             n_vertices = std::stoi(broken_line[2]);
             n_edges = std::stoi(broken_line[3]); 
-            for(auto i{0}; i<=n_vertices; ++i){
+            for(auto i{0}; i<n_vertices; ++i){
                 grafo.emplace_back();
-                grafo[i].push_back(i);
+                grafo[i].first = i;
             }
         }
         //if it's an edge
         else if(broken_line[0] == "e"){
             //adds the each vertex in the other's list
-            grafo[std::stoi(broken_line[2])].push_back(std::stoi(broken_line[1]));
-            grafo[std::stoi(broken_line[1])].push_back(std::stoi(broken_line[2]));
+            grafo[std::stoi(broken_line[2])-1].second.push_back(std::stoi(broken_line[1])-1);
+            grafo[std::stoi(broken_line[1])-1].second.push_back(std::stoi(broken_line[2])-1);
         }
         //if it's undefined
         else continue;
     }
+    // print_graph(grafo);
+    // std::cout<<std::endl;
 }
 
-std::vector<std::vector<int>> Parser::get_grafo(){
+std::vector<std::pair<int,std::vector<int>>> Parser::get_grafo(){
     return grafo;
 }
 
@@ -107,4 +116,9 @@ int Parser::get_vertices(){
 
 int Parser::get_edges(){
     return n_edges;
+}
+
+
+std::string Parser::get_file_name(){
+    return file_name;
 }

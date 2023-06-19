@@ -12,7 +12,7 @@
  */
 class Parser{
     private: 
-        std::vector<std::vector<int>> grafo;    //!< Matriz gerada pelo grafo recebido
+        std::vector<std::pair<int,std::vector<int>>> grafo;    //!< Matriz gerada pelo grafo recebido
         std::string file_name;                  //!< To open the test file
         int n_vertices;                         //!< Number of vertices
         int n_edges;                            //!< Number of edges
@@ -20,7 +20,8 @@ class Parser{
         /// Builds a new parser
         Parser(int);
         Parser(std::string);
-        std::vector<std::vector<int>> get_grafo();
+        std::vector<std::pair<int,std::vector<int>>> get_grafo();
+        std::string get_file_name();
         int get_vertices();
         int get_edges();
     private:
