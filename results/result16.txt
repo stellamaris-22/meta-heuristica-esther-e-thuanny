@@ -22,5 +22,5 @@
 
 377 430 
 
-Tempo (em ms): 2
+Tempo (em ms): 8
 Número de cores usadas: 12

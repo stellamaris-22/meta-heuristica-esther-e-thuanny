@@ -86,7 +86,7 @@ void Manager::display_initialization(){
     //pediu para executar os testes
     if(com == '1'){
         std::cout<<"\nNós temos 58 casos de teste disponíveis. Por este motivo, caso deseje mais detalhes sobre um \n"
-                 <<"deles ou deseje executar algum, digite um número de 1 a 58. Caso deseje executar todos os testes,\n"
+                 <<"deles ou deseje executar algum, digite um número de 1 a 59. Caso deseje executar todos os testes,\n"
                  <<"digite 0 > ";
         //índice do teste
         int idx;
@@ -114,7 +114,7 @@ void Manager::display_initialization(){
             all = true;
             execute = true;
             //todos os arquivos
-            std::vector<std::string> file_names{"anna.col", "david.col", "fpsol2.i.1.col", "fpsol2.i.2.col", "fpsol2.i.3.col", "games120.col", "homer.col", "huck.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
+            std::vector<std::string> file_names{"original.col","anna.col", "david.col", "fpsol2.i.1.col", "fpsol2.i.2.col", "fpsol2.i.3.col", "games120.col", "homer.col", "huck.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
             //índice do teste atual
             curr_idx = 0;
             //passa por cada arquivo
@@ -224,7 +224,9 @@ void Manager::welsh_powell(){
     bool colored;
 
     //ordenando vértices com base em seu grau
-    std::sort(grafo.begin(), grafo.end(), [](const std::pair<int,std::vector<int>>& a, const std::pair<int,std::vector<int>>& b) {return a.second.size() > b.second.size();});
+    std::sort(grafo.begin(), grafo.end(), 
+              [](const std::pair<int,std::vector<int>>& a, const std::pair<int,std::vector<int>>& b) 
+              {return a.second.size() > b.second.size();});
     auto n_cores{grafo.size()};
     //já começamos com no mínimo uma cor
     n_colors = 1;

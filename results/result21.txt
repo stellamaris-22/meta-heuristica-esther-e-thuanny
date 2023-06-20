@@ -30,5 +30,5 @@
 
 403 406 414 431 
 
-Tempo (em ms): 4
+Tempo (em ms): 7
 Número de cores usadas: 16

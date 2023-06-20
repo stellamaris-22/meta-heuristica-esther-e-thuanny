@@ -56,5 +56,5 @@
 
 129 132 
 
-Tempo (em ms): 9
+Tempo (em ms): 34
 Número de cores usadas: 29

@@ -36,5 +36,5 @@
 
 184 
 
-Tempo (em ms): 1
+Tempo (em ms): 2
 Número de cores usadas: 19

@@ -20,5 +20,5 @@
 
 316 401 441 
 
-Tempo (em ms): 3
+Tempo (em ms): 15
 Número de cores usadas: 11

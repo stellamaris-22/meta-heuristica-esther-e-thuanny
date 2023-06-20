@@ -16,5 +16,5 @@
 
 329 340 368 382 406 428 
 
-Tempo (em ms): 6
+Tempo (em ms): 12
 Número de cores usadas: 9

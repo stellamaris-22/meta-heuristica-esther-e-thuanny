@@ -14,5 +14,5 @@
 
 485 541 560 
 
-Tempo (em ms): 9
+Tempo (em ms): 27
 Número de cores usadas: 8

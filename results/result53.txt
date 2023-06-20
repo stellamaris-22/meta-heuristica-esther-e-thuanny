@@ -42,5 +42,5 @@
 
 212 
 
-Tempo (em ms): 1
+Tempo (em ms): 3
 Número de cores usadas: 22

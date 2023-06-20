@@ -84,5 +84,5 @@
 
 705 
 
-Tempo (em ms): 27
+Tempo (em ms): 52
 Número de cores usadas: 43

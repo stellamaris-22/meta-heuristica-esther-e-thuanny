@@ -14,5 +14,5 @@
 
 36 131 
 
-Tempo (em ms): 0
+Tempo (em ms): 2
 Número de cores usadas: 8

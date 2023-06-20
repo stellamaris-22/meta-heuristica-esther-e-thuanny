@@ -26,5 +26,5 @@
 
 443 
 
-Tempo (em ms): 3
+Tempo (em ms): 5
 Número de cores usadas: 14

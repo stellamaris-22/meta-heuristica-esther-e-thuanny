@@ -64,5 +64,5 @@
 
 212 219 
 
-Tempo (em ms): 6
+Tempo (em ms): 11
 Número de cores usadas: 33

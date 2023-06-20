@@ -20,5 +20,5 @@
 
 187 252 330 395 413 446 
 
-Tempo (em ms): 4
+Tempo (em ms): 11
 Número de cores usadas: 11

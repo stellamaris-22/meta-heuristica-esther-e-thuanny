@@ -94,5 +94,5 @@
 
 415 421 
 
-Tempo (em ms): 11
+Tempo (em ms): 26
 Número de cores usadas: 48
