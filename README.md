@@ -24,3 +24,7 @@ A saída será dada por uma sequência de linhas não-vazias. Cada linha represe
 ## Metodologia
 
 Para a solução deste problema, lemos um grafo com arestas de restrição de um arquivo .col e, nele, executamos o algoritmo de Welsh-Powell, gerando partições do conjunto de vértices. Cada vértice estará em exatamente uma partição, então todos os vértices estarão coloridos. Não haverá dois vértices adjacentes na mesma partição, garantindo que aulas que não podem ocorrer na mesma sala estarão em salas distintas. Ao fim, mostramos estas partições em cada linha.
+
+
+## Vídeo e Relatório
+O nosso vídeo de explicação e o relatório com as informações do trabalho se encontram nesse link: https://drive.google.com/drive/folders/1xR83S0Bej4HbXfPI-kSM7UEusmgVSKKI?usp=drive_link
