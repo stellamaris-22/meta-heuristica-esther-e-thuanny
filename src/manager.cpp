@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 #include <string>
 #include <fstream>
 #include <algorithm>
@@ -60,10 +61,10 @@ int Manager::get_arestas(){
 void Manager::solve(){
     //cronometra
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-    welsh_powell();
+    albuquerque_wanderley();
     std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
     tempo = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    display_solution();
+    display_simple();
 };
 
 int Manager::get_colors(){
@@ -165,6 +166,14 @@ void Manager::display_initialization(){
 
 };
 
+void Manager::display_simple(){
+    // std::ofstream out;
+    // out.open("results/result.txt");
+    std::vector<std::string> file_names{"original.col","anna.col", "david.col", "fpsol2.i.1.col", "fpsol2.i.2.col", "fpsol2.i.3.col", "games120.col", "homer.col", "huck.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
+    // std::cout<<curr_idx<<" | ";
+    std::cout<<file_names[curr_idx-1]<<" & "<<n_vertices<<" & "<<n_arestas<<" & "<<n_colors<<" & "<<tempo.count()<<" \\\\\n";
+}
+
 /**
  * Mostra as partições geradas
  */
@@ -216,6 +225,18 @@ bool empty_intersection(std::vector<T> a, std::vector<T> b){
 }
 
 /**
+ * Retorna índice do vértice de maior grau
+ */
+template <typename T>
+int greatest_degree(std::vector<T> a){
+    auto maior{0};
+    for(auto i{0u}; i < a.size(); ++i){
+        if(a[i].second.size() > a[maior].second.size()) maior = i;
+    }
+    return maior;
+}
+
+/**
  * Algoritmo usado para colorir nosso grafo
  * seguindo as restrições dadas
  */
@@ -263,3 +284,51 @@ void Manager::welsh_powell(){
     found_solution = true; 
 };
 
+/**
+ * Algoritmo autoral usado para colorir nosso 
+ * grafo seguindo as restrições dadas
+ */
+void Manager::albuquerque_wanderley(){
+    //vértices coloridos
+    std::vector<bool> colored(grafo.size(), false);
+
+    //iniciando a colorir pelo vértice de maior grau
+    auto v{greatest_degree(grafo)};
+
+    auto n_cores{grafo.size()};
+    //já começamos com no mínimo uma cor
+    n_colors = 1;
+    //cria cada partição de cor
+    for(auto i{0u}; i<n_cores; ++i) solucao.emplace_back();
+    //vértice de maior grau é colorido com a primeira cor
+    solucao[0].push_back(v);
+    colored[v] = true;
+
+    std::queue<unsigned long long int> q;
+    q.push(v);
+
+    while (!q.empty()){
+        v = q.front();
+        q.pop();
+        for(auto w : grafo[v].second){
+            if(!colored[w]){
+                for(auto& j : solucao){ 
+                    //se os adjacentes do vértice i já não estão da cor j
+                    if (empty_intersection(grafo[w].second, j)) {
+                        colored[w] = true;
+                        //se é uma cor nova, o número de cores aumenta
+                        if(j.empty()) ++n_colors;
+                        //colore o vértice w da cor j
+                        j.push_back(grafo[w].first);
+                        //preciso do nome do vértice ordenado para checar a interseção
+                        std::sort(j.begin(), j.end());
+                        //se foi colorido, podemos ir para o próximo vértice
+                        break;
+                    }
+                }
+                q.push(w);
+            }
+        }
+    }
+    found_solution = true;
+}

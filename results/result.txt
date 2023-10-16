@@ -1,6 +1,8 @@
-1 4 
+2 5 
 
-2 3 5 
+3 4 
+
+1 
 
 Tempo (em ms): 0
-Número de cores usadas: 2
+Número de cores usadas: 3

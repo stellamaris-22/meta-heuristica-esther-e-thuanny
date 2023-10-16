@@ -47,7 +47,11 @@ class Manager{
         void display_initialization();
         /// Tela com as partições geradas
         void display_solution();
+        /// Tela com os resultados em LaTeX
+        void display_simple();
         /// Execução do algoritmo de Welsh-Powell
         void welsh_powell();
+        /// Execução da heurística desenvolvida pelas autoras deste trabalho
+        void albuquerque_wanderley();
 };
 #endif
