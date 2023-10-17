@@ -64,7 +64,7 @@ void Manager::solve(){
     albuquerque_wanderley();
     std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
     tempo = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    display_simple();
+    display_solution();
 };
 
 int Manager::get_colors(){

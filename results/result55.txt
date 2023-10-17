@@ -44,5 +44,5 @@
 
 250 
 
-Tempo (em ms): 2
+Tempo (em ms): 5
 Número de cores usadas: 23

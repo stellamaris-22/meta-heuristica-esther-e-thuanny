@@ -406,5 +406,5 @@
 
 800 
 
-Tempo (em ms): 183
+Tempo (em ms): 402
 Número de cores usadas: 204

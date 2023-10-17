@@ -30,5 +30,5 @@
 
 363 397 
 
-Tempo (em ms): 6
+Tempo (em ms): 8
 Número de cores usadas: 16
