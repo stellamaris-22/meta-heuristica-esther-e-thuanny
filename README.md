@@ -1,7 +1,7 @@
-# Trabalho de grafos da terceira unidade de Esther e Thuanny
+# Trabalho de Projeto e Análise de  Algoritmos de Esther e Thuanny
 ## Proposta
 
-Propomos, neste trabalho, entregar uma implementação do algoritmo de Welsh-Powell que resolva problemas de coloração de grafos, modelados especificamente para resolver o problema de timetabling. Ele lê arquivos .col, que descrevem grafos, e gera uma tabela que aloque os recursos de modo a obedecer às restrições especificadas no problema. Assumimos, em particular, que os vértices são aulas e que as arestas são restrições - aulas que não podem ocorrer na mesma sala. Ao colorir este grafo, o resultado será uma tabela de salas e horários organizando cada aula em uma sala e horário. Cada cor será uma sala. 
+Propomos, neste trabalho, entregar uma implementação de uma heurística inspirada no algoritmo de Welshell-Powell que resolva problemas de coloração de grafos, modelados especificamente para resolver o problema de timetabling. Ele lê arquivos .col, que descrevem grafos, e gera uma tabela que aloque os recursos de modo a obedecer às restrições especificadas no problema. Assumimos, em particular, que os vértices são aulas e que as arestas são restrições - aulas que não podem ocorrer na mesma sala. Ao colorir este grafo, o resultado será uma tabela de salas e horários organizando cada aula em uma sala e horário. Cada cor será uma sala. 
 
 ## Compilar
 
@@ -26,5 +26,13 @@ A saída será dada por uma sequência de linhas não-vazias. Cada linha represe
 Para a solução deste problema, lemos um grafo com arestas de restrição de um arquivo .col e, nele, executamos o algoritmo de Welsh-Powell, gerando partições do conjunto de vértices. Cada vértice estará em exatamente uma partição, então todos os vértices estarão coloridos. Não haverá dois vértices adjacentes na mesma partição, garantindo que aulas que não podem ocorrer na mesma sala estarão em salas distintas. Ao fim, mostramos estas partições em cada linha.
 
 
-## Vídeo e Relatório
-O nosso vídeo de explicação e o relatório com as informações do trabalho se encontram nesse link: https://drive.google.com/drive/folders/1xR83S0Bej4HbXfPI-kSM7UEusmgVSKKI?usp=drive_link
+## Relatório
+O relatório desse Projeto se encontra aqui: [Relatório do Projeto](Relatorio.pdf). Nele, foi especificado o tipo do problema, apresentamos tipos de heurísticas que são encontradas na literatura, sugerimos uma outra solução, implementamos e comparamos com os resultados obtidos na implementação do algoritmo Welshell-Powell. 
+
+## Agradecimentos 
+
+Esse projeto foi feito por Esther Wanderley & Thuanny Albuquerque. 
+
+Esperamos que gostem e toda sugestão/crítica é bem-vinda :smiley: 
+
+Agradecemos pela atençaõ! 
