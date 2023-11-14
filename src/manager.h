@@ -20,7 +20,7 @@ class Manager{
         unsigned short salas_usadas{0};                             //!< Número de salas usadas na solução
         bool found_solution{false};                                 //!< Se foi ou não encontrada uma solução para aquele problema
         bool minimize_rooms{false};                                 //!< O que estamos minimizando: salas (true) ou horários (false)
-        int n_colors;                                               //!< Número de cores utilizadas
+        unsigned int n_colors;                                               //!< Número de cores utilizadas
         int n_vertices;                                             //!< Número de vértices no grafo
         int n_arestas;                                              //!< Número de arestas no grafo
         bool execute{false};                                        //!< Se vamos ou não executar aquele teste
@@ -53,5 +53,15 @@ class Manager{
         void welsh_powell();
         /// Execução da heurística desenvolvida pelas autoras deste trabalho
         void albuquerque_wanderley();
+        /// Execução do algoritmo exato autoral (backtracking)
+        void ET(std::pair<int, std::vector<int>>, std::vector<std::pair<int, std::vector<int>>>, std::vector<std::vector<int>>, unsigned int);
+        /// Método que chama o método recursivo da maneira correta
+        void controle_ET();
+        /// Execução do algoritmo exato encontrado na literatura (branch and bound)
+        void Zykov();
+        /// Método auxiliar ao algoritmo de Zykov
+        void ColorZ(std::vector<std::pair<int,std::vector<int>>>);
+
+
 };
 #endif

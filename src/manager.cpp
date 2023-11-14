@@ -61,7 +61,7 @@ int Manager::get_arestas(){
 void Manager::solve(){
     //cronometra
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-    albuquerque_wanderley();
+    Zykov();
     std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
     tempo = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     display_solution();
@@ -332,3 +332,105 @@ void Manager::albuquerque_wanderley(){
     }
     found_solution = true;
 }
+
+void Manager::controle_ET(){
+    std::vector<std::vector<int>> solucao_parcial;
+    auto copy = grafo;
+    n_colors = -1;
+    for(auto j{0u}; j<grafo.size(); ++j) solucao_parcial.emplace_back();
+    for(auto i : copy){
+        ET(i, copy, solucao_parcial, 0);
+    }
+}
+
+void Manager::ET(std::pair<int, std::vector<int>> vertice_atual, std::vector<std::pair<int, std::vector<int>>> vertices_nao_coloridos, std::vector<std::vector<int>> solucao_parcial, unsigned int numero_de_cores){
+    //colorir
+    for(auto& j : solucao_parcial){ 
+        //se os adjacentes do vértice i já não estão da cor j
+        if (empty_intersection(vertice_atual.second, j)) {
+            auto rem{std::find(vertices_nao_coloridos.begin(), vertices_nao_coloridos.end(), vertice_atual)};
+            vertices_nao_coloridos.erase(rem);
+            //se é uma cor nova, o número de cores aumenta
+            if(j.empty()) ++numero_de_cores;
+            //colore o vértice da cor j
+            j.push_back(vertice_atual.first);
+            //preciso do nome do vértice ordenado para checar a interseção
+            std::sort(j.begin(), j.end());
+            //se foi colorido, podemos ir para o próximo vértice
+            break;
+        }
+    }
+
+    //verificação do caso-base
+    if(!vertices_nao_coloridos.empty()){
+        for (auto i : vertices_nao_coloridos){
+            ET(i, vertices_nao_coloridos, solucao_parcial, numero_de_cores);
+        }
+        
+    } else {
+        found_solution = true;
+        if(numero_de_cores < n_colors){
+            n_colors = numero_de_cores;
+            solucao = solucao_parcial;
+        }
+    }
+}
+
+void Manager::Zykov(){
+    ColorZ(grafo);
+}
+
+std::pair<int, int> two_unlinked(std::vector<std::pair<int,std::vector<int>>> G){
+    bool flasg;
+    for(auto i : G){
+        for(auto j : G){
+            flasg = false;
+            for(auto k : j.second){
+                if(i.first == k){
+                    flasg = true;
+                }
+            }
+            if(!flasg){
+                return std::pair<int, int>{i.first, j.first};
+            }
+        }
+    }
+    return std::pair<int, int>{-1, -1};
+}
+
+bool completo(std::vector<std::pair<int,std::vector<int>>>& G){
+    return two_unlinked(G) == std::pair<int, int>{-1, -1};
+}
+
+void contract_vertices(std::vector<std::pair<int,std::vector<int>>>& G, std::pair<int, int> vertices){
+    for(auto i : G[vertices.first].second){
+        for(auto j : G[vertices.second].second){
+            if(i != j){
+                G[vertices.first].second.push_back(j);
+            }
+        }
+    }
+    G[vertices.second].first = vertices.first;
+    G[vertices.second].second.clear();    
+}
+
+void add_edge(std::vector<std::pair<int,std::vector<int>>>& G, std::pair<int, int> vertices){
+    G[vertices.first].second.push_back(vertices.second);
+    G[vertices.second].second.push_back(vertices.first);
+}
+
+void Manager::ColorZ(std::vector<std::pair<int,std::vector<int>>> G){
+    auto n{G.size()};
+    if(completo(G)){
+        std::cout<<n_colors;
+        n_colors = n_colors < n ? n_colors : n;
+    } else {
+        std::vector<std::pair<int,std::vector<int>>> G1{G}, G2{G};
+        std::pair<int, int> vertices_labels = two_unlinked(G);
+        contract_vertices(G1, vertices_labels);
+        add_edge(G2, vertices_labels);
+        ColorZ(G1);
+        ColorZ(G2);
+    }
+}
+
