@@ -39,6 +39,6 @@ O vídeo com a apresentação das autoras sobre o projeto se encontra aqui: [Ví
 
 Esse projeto foi feito por Esther Wanderley & Thuanny Albuquerque.
 
-Esperamos que gostem e toda sugestão/crítica é bem-vinda :smiley: 
+Esperamos que gostem e toda sugestão/crítica é bem-vinda :smiley:
 
 Agradecemos pela atenção! 
