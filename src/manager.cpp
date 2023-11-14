@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include "manager.h"
 #include "parser.h"
+int problema_escolhido =0; 
 
 //Para debug
 template <typename T>
@@ -19,6 +20,8 @@ void print_graph(std::vector<std::pair<int,std::vector<T>>> vec){
         std::cout<<std::endl;
     }
 }
+
+
 
 /**
  * Esta função é responsável por inicializar nosso grafo
@@ -61,10 +64,10 @@ int Manager::get_arestas(){
 void Manager::solve(){
     //cronometra
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-    controle_ET();
+    Zykov();
     std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
     tempo = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    display_solution();
+    display_simple();
 };
 
 int Manager::get_colors(){
@@ -86,12 +89,13 @@ void Manager::display_initialization(){
     std::cin >> com;
     //pediu para executar os testes
     if(com == '1'){
-        std::cout<<"\nNós temos 58 casos de teste disponíveis. Por este motivo, caso deseje mais detalhes sobre um \n"
-                 <<"deles ou deseje executar algum, digite um número de 1 a 59. Caso deseje executar todos os testes,\n"
+        std::cout<<"\nNós temos 10 casos de teste disponíveis. Por este motivo, caso deseje mais detalhes sobre um \n"
+                 <<"deles ou deseje executar algum, digite um número de 1 a 10. Caso deseje executar todos os testes,\n"
                  <<"digite 0 > ";
         //índice do teste
         int idx;
         std::cin >> idx;
+        problema_escolhido = idx;
         //se um teste foi pedido
         if(idx){
             //gera o grafo do arquivo requisitado
@@ -115,7 +119,7 @@ void Manager::display_initialization(){
             all = true;
             execute = true;
             //todos os arquivos
-            std::vector<std::string> file_names{"original.col","anna.col", "david.col", "fpsol2.i.1.col", "fpsol2.i.2.col", "fpsol2.i.3.col", "games120.col", "homer.col", "huck.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
+            std::vector<std::string> file_names{"original.col","cria.col", "corinthians.col", "ts.col", "sm.col", "id.col", "realmadrid.col", "panic.col", "es.col"};
             //índice do teste atual
             curr_idx = 0;
             //passa por cada arquivo
@@ -169,9 +173,9 @@ void Manager::display_initialization(){
 void Manager::display_simple(){
     // std::ofstream out;
     // out.open("results/result.txt");
-    std::vector<std::string> file_names{"original.col","anna.col", "david.col", "fpsol2.i.1.col", "fpsol2.i.2.col", "fpsol2.i.3.col", "games120.col", "homer.col", "huck.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
-    // std::cout<<curr_idx<<" | ";
-    std::cout<<file_names[curr_idx-1]<<" & "<<n_vertices<<" & "<<n_arestas<<" & "<<n_colors<<" & "<<tempo.count()<<" \\\\\n";
+    std::vector<std::string> file_names{"original.col","cria.col", "corinthians.col", "ts.col", "sm.col", "id.col", "realmadrid.col", "panic.col", "es.col"};
+    // std::cout<<curr_idx<<" | "
+    std::cout<<" & "<<n_colors<<" & "<<tempo.count()<<" \\\\\n";
 }
 
 /**
@@ -202,10 +206,12 @@ void Manager::display_solution(){
         }
     }
     //imprime tempo e cores
-    std::cout<<"Tempo (em ms): "<<tempo.count()<<std::endl;
-    out << "Tempo (em ms): "<<tempo.count()<<std::endl;
-    std::cout<<"Número de cores usadas: "<<n_colors<<std::endl;
-    out<<"Número de cores usadas: "<<n_colors<<std::endl;
+    // std::cout<<"Tempo (em ms): "<<tempo.count()<<std::endl;
+    // out << "Tempo (em ms): "<<tempo.count()<<std::endl;
+    // std::cout<<"Número de cores usadas: "<<n_colors<<std::endl;
+    // out<<"Número de cores usadas: "<<n_colors<<std::endl;
+
+    std::cout<<problema_escolhido<<" & "<<n_vertices<<" & "<<n_arestas<<" & "<<n_colors<<" & "<<tempo.count()<<" \\\\\n";
 };
 
 
@@ -383,7 +389,9 @@ void Manager::Zykov(){
 std::pair<int, int> two_unlinked(std::vector<std::pair<int,std::vector<int>>> G){
     bool flasg;
     for(auto i : G){
+        if(i.second.empty()) continue;
         for(auto j : G){
+            if(i == j || j.second.empty()) continue;
             flasg = false;
             for(auto k : j.second){
                 if(i.first == k){
@@ -398,20 +406,25 @@ std::pair<int, int> two_unlinked(std::vector<std::pair<int,std::vector<int>>> G)
     return std::pair<int, int>{-1, -1};
 }
 
-bool completo(std::vector<std::pair<int,std::vector<int>>>& G){
+bool completo(std::vector<std::pair<int,std::vector<int>>> G){
     return two_unlinked(G) == std::pair<int, int>{-1, -1};
 }
 
 void contract_vertices(std::vector<std::pair<int,std::vector<int>>>& G, std::pair<int, int> vertices){
-    for(auto i : G[vertices.first].second){
-        for(auto j : G[vertices.second].second){
-            if(i != j){
-                G[vertices.first].second.push_back(j);
+    bool flasg = false;
+    for(auto i : G[vertices.second].second){
+        flasg = false;
+        for(auto j : G[vertices.first].second){
+            if(i == j){
+                flasg = true;
             }
+        }
+        if(!flasg){
+            G[vertices.first].second.push_back(i);
         }
     }
     G[vertices.second].first = vertices.first;
-    G[vertices.second].second.clear();    
+    G[vertices.second].second.clear();
 }
 
 void add_edge(std::vector<std::pair<int,std::vector<int>>>& G, std::pair<int, int> vertices){
@@ -419,18 +432,22 @@ void add_edge(std::vector<std::pair<int,std::vector<int>>>& G, std::pair<int, in
     G[vertices.second].second.push_back(vertices.first);
 }
 
-void Manager::ColorZ(std::vector<std::pair<int,std::vector<int>>> G){
+void Manager::ColorZ(const std::vector<std::pair<int,std::vector<int>>>& G){
     auto n{G.size()};
+    // print_graph(G);
     if(completo(G)){
-        std::cout<<n_colors;
+        // std::cout<<n_colors<<", "<<n<<std::endl;
         n_colors = n_colors < n ? n_colors : n;
     } else {
         std::vector<std::pair<int,std::vector<int>>> G1{G}, G2{G};
         std::pair<int, int> vertices_labels = two_unlinked(G);
+
         contract_vertices(G1, vertices_labels);
         add_edge(G2, vertices_labels);
+
         ColorZ(G1);
         ColorZ(G2);
     }
 }
+
 

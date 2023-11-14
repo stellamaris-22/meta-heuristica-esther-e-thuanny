@@ -34,11 +34,12 @@ Os slides de apresentação se encontram aqui: [Slides](https://www.canva.com/de
 
 ## Vídeo
 
-O vídeo com a apresentação das autoras sobre o projeto se encontra aqui: [Vídeo]().
-## Agradecimentos 
+O vídeo com a apresentação das autoras sobre o projeto se encontra aqui: [Vídeo](https://drive.google.com/file/d/1lUIavJJgSRRGATlbX3u_X1LKC9E5INi8/view?usp=drive_link).
+
+## Agradecimentos
 
 Esse projeto foi feito por Esther Wanderley & Thuanny Albuquerque.
 
 Esperamos que gostem e toda sugestão/crítica é bem-vinda :smiley:
 
-Agradecemos pela atenção! 
+Agradecemos pela atenção!

@@ -60,7 +60,7 @@ class Manager{
         /// Execução do algoritmo exato encontrado na literatura (branch and bound)
         void Zykov();
         /// Método auxiliar ao algoritmo de Zykov
-        void ColorZ(std::vector<std::pair<int,std::vector<int>>>);
+        void ColorZ(const std::vector<std::pair<int,std::vector<int>>>&);
 
 
 };

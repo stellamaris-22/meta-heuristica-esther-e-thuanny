@@ -2,5 +2,3 @@
 
 2 3 5 
 
-Tempo (em ms): 1
-Número de cores usadas: 2
