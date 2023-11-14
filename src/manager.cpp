@@ -61,7 +61,7 @@ int Manager::get_arestas(){
 void Manager::solve(){
     //cronometra
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-    Zykov();
+    controle_ET();
     std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
     tempo = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     display_solution();
