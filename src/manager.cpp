@@ -367,6 +367,8 @@ void Manager::ET(std::pair<int, std::vector<int>> vertice_atual, std::vector<std
         }
     }
 
+    if(numero_de_cores>=n_colors) return; //poda
+
     //verificação do caso-base
     if(!vertices_nao_coloridos.empty()){
         for (auto i : vertices_nao_coloridos){
