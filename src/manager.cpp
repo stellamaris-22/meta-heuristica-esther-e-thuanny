@@ -7,7 +7,8 @@
 #include <unordered_map>
 #include "manager.h"
 #include "parser.h"
-int problema_escolhido =0; 
+#include <random>
+int problema_escolhido = 0; 
 
 //Para debug
 template <typename T>
@@ -64,7 +65,7 @@ int Manager::get_arestas(){
 void Manager::solve(){
     //cronometra
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-    Zykov();
+    wa(5, 8);
     std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
     tempo = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     display_simple();
@@ -80,7 +81,7 @@ int Manager::get_colors(){
  * Pede o arquivo e determina qual(is) teste(s) serão executados
  */
 void Manager::display_initialization(){
-    std::cout<<"Bem-vindo(a) à nossa implementação do algoritmo de Welsh-Powell!\n"
+    std::cout<<"Bem-vindo(a) à nossa meta-heurística! Ela utiliza o métodode Simulated Annealing\n"
              <<"\n1 - Casos de teste disponíveis\n"
              <<"2 - Referências dos casos de teste\n"
              <<"Por favor, digite qual dos dois gostaria de ver > ";
@@ -119,7 +120,7 @@ void Manager::display_initialization(){
             all = true;
             execute = true;
             //todos os arquivos
-            std::vector<std::string> file_names{"original.col","cria.col", "corinthians.col", "ts.col", "sm.col", "id.col", "realmadrid.col", "panic.col", "es.col"};
+            std::vector<std::string> file_names{"original.col","anna.col", "david.col", "fpsol2.i.1.col", "fpsol2.i.2.col", "fpsol2.i.3.col", "games120.col", "homer.col", "huck.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
             //índice do teste atual
             curr_idx = 0;
             //passa por cada arquivo
@@ -171,10 +172,12 @@ void Manager::display_initialization(){
 };
 
 void Manager::display_simple(){
-    // std::ofstream out;
-    // out.open("results/result.txt");
-    std::vector<std::string> file_names{"original.col","cria.col", "corinthians.col", "ts.col", "sm.col", "id.col", "realmadrid.col", "panic.col", "es.col"};
-    // std::cout<<curr_idx<<" | "
+    std::ofstream out;
+    out.open("results/result.txt");
+    std::vector<std::string> file_names{"original.col","anna.col", "david.col", "fpsol2.i.1.col", "fpsol2.i.2.col", "fpsol2.i.3.col", "games120.col", "homer.col", "huck.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
+    out<<file_names[curr_idx];
+    out<<" & "<<n_colors<<" & "<<tempo.count()<<" \\\\\n";
+    std::cout<<file_names[curr_idx];
     std::cout<<" & "<<n_colors<<" & "<<tempo.count()<<" \\\\\n";
 }
 
@@ -436,9 +439,7 @@ void add_edge(std::vector<std::pair<int,std::vector<int>>>& G, std::pair<int, in
 
 void Manager::ColorZ(const std::vector<std::pair<int,std::vector<int>>>& G){
     auto n{G.size()};
-    // print_graph(G);
     if(completo(G)){
-        // std::cout<<n_colors<<", "<<n<<std::endl;
         n_colors = n_colors < n ? n_colors : n;
     } else {
         std::vector<std::pair<int,std::vector<int>>> G1{G}, G2{G};
@@ -452,4 +453,96 @@ void Manager::ColorZ(const std::vector<std::pair<int,std::vector<int>>>& G){
     }
 }
 
+void Manager::wa(double T, unsigned int L){
+    albuquerque_wanderley();
+    bool melhor_encontrado{true};
+    auto melhor_solucao = solucao;
 
+    for(auto& i : solucao){
+        if (i.empty()){
+            solucao.erase(std::vector<std::vector<int>>::iterator{&i});
+        }
+    }
+
+    while(melhor_encontrado){
+
+        melhor_encontrado = false;
+        for(auto i{L - L}; i < L; ++i){
+            vizinho_valido = false;
+            auto sol_viz{solucao};
+            auto cont{i};
+            while(!vizinho_valido && cont < L) {
+                ++cont;
+                sol_viz = vizinho_aleatorio(solucao);
+            }
+            if(!vizinho_valido) continue;
+            auto delta{sol_viz.size() - solucao.size()};
+            if(delta < 0){
+                melhor_encontrado = true;
+                solucao = sol_viz;
+                if(solucao.size() < melhor_solucao.size()){
+                    melhor_solucao = solucao;
+                }
+            } else {
+                std::uniform_real_distribution<double> unif(0,1);
+                std::default_random_engine re;
+                double a_random_double = unif(re);
+                if(a_random_double < pow(10, -delta/T)){
+                    solucao = sol_viz;
+                    melhor_encontrado = true;
+                } 
+            }
+        }
+    }
+    n_colors = solucao.size();
+}
+
+
+std::vector<std::vector<int>> Manager::vizinho_aleatorio(std::vector<std::vector<int>> s){
+    std::random_device r1;
+    std::default_random_engine e1(r1());
+    std::uniform_int_distribution<int> uniform_dist1(0, s.size()-1);
+    int color = uniform_dist1(e1);
+
+    std::random_device r2;
+    std::default_random_engine e2(r2());
+    std::uniform_int_distribution<int> uniform_dist2(0, s[color].size()-1);
+    int vertex_index = uniform_dist2(e2);
+
+    int vertex_label{s[color][vertex_index]};
+    s[color].erase(s[color].begin()+vertex_index);
+    
+    int sorteado{color};
+    while(sorteado == color){
+        std::random_device r;
+        std::default_random_engine e(r());
+        std::uniform_int_distribution<int> uniform_dist(0, s.size()-1);
+        sorteado = uniform_dist(e);
+    }
+    if(s[color].empty()){
+        s.erase(s.begin()+color);
+    }
+    s[sorteado].push_back(vertex_label);
+    std::sort(s[sorteado].begin(), s[sorteado].end());
+
+    //first a label do vertice, second a cor invalida
+
+    //verificar compatibilidade em cada cor
+    for(auto i : s){
+        for(auto vertice : i){
+            for(auto vizinho : grafo[vertice].second){
+                for(auto elementos_da_cor : i){
+                    if(vizinho == elementos_da_cor){
+                        //marcar esta solucao como invalida
+                        // marcados.emplace_back(vertice, i);
+                        vizinho_valido = false;
+                        return s;
+                    }
+                }
+            }
+        }
+    }
+    vizinho_valido = true;
+
+    return s;
+}

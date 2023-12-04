@@ -27,6 +27,8 @@ class Manager{
         std::string file_name;                                      //!< Arquivo de onde tiraremos o teste
         std::chrono::milliseconds tempo;                            //!< Duração do experimento                  
         int curr_idx;                                               //!< Índice do teste sendo executado
+        bool vizinho_valido{false};
+        // std::vector<std::pair<int, int>> marcados;
     public:
         bool all{false};                                            //!< Se todos os testes serão executados
         /// Constrói um novo Manager
@@ -61,6 +63,11 @@ class Manager{
         void Zykov();
         /// Método auxiliar ao algoritmo de Zykov
         void ColorZ(const std::vector<std::pair<int,std::vector<int>>>&);
+        /// Meta-heurística: simulated annealing
+        void wa(double, unsigned int);
+        /// Obter vizinho aleatório de um grafo colorido
+        std::vector<std::vector<int>> vizinho_aleatorio(std::vector<std::vector<int>>);
+
 
 
 };
