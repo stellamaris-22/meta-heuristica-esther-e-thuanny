@@ -12,5 +12,3 @@
 
 14 96 101 103 
 
-Tempo (em ms): 1
-Número de cores usadas: 7

@@ -60,5 +60,3 @@
 
 125 
 
-Tempo (em ms): 13
-Número de cores usadas: 31

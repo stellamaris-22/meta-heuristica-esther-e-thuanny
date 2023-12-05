@@ -68,5 +68,3 @@
 
 170 
 
-Tempo (em ms): 19
-Número de cores usadas: 35

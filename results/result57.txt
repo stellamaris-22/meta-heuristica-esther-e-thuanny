@@ -70,5 +70,3 @@
 
 74 82 345 
 
-Tempo (em ms): 8
-Número de cores usadas: 36

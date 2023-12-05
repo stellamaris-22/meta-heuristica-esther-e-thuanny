@@ -18,5 +18,3 @@
 
 432 
 
-Tempo (em ms): 9
-Número de cores usadas: 10

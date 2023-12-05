@@ -64,5 +64,3 @@
 
 18 
 
-Tempo (em ms): 6
-Número de cores usadas: 33

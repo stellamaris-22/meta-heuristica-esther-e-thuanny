@@ -20,5 +20,3 @@
 
 339 415 436 439 
 
-Tempo (em ms): 7
-Número de cores usadas: 11

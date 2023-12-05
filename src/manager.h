@@ -64,7 +64,7 @@ class Manager{
         /// Método auxiliar ao algoritmo de Zykov
         void ColorZ(const std::vector<std::pair<int,std::vector<int>>>&);
         /// Meta-heurística: simulated annealing
-        void wa(double, unsigned int);
+        void rs(double, unsigned int);
         /// Obter vizinho aleatório de um grafo colorido
         std::vector<std::vector<int>> vizinho_aleatorio(std::vector<std::vector<int>>);
 

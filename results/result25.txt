@@ -52,5 +52,3 @@
 
 432 449 
 
-Tempo (em ms): 14
-Número de cores usadas: 27

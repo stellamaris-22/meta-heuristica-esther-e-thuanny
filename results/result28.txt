@@ -38,5 +38,3 @@
 
 116 
 
-Tempo (em ms): 1
-Número de cores usadas: 20

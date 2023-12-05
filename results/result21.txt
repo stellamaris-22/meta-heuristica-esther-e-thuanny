@@ -38,5 +38,3 @@
 
 405 
 
-Tempo (em ms): 12
-Número de cores usadas: 20

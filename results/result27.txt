@@ -12,5 +12,3 @@
 
 123 
 
-Tempo (em ms): 0
-Número de cores usadas: 7

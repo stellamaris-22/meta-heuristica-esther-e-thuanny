@@ -65,10 +65,10 @@ int Manager::get_arestas(){
 void Manager::solve(){
     //cronometra
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-    wa(5, 8);
+    rs(5, 8);
     std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
     tempo = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    display_simple();
+    display_solution();
 };
 
 int Manager::get_colors(){
@@ -174,10 +174,10 @@ void Manager::display_initialization(){
 void Manager::display_simple(){
     std::ofstream out;
     out.open("results/result.txt");
-    std::vector<std::string> file_names{"original.col","anna.col", "david.col", "fpsol2.i.1.col", "fpsol2.i.2.col", "fpsol2.i.3.col", "games120.col", "homer.col", "huck.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
+    std::vector<std::string> file_names{"original.col","cria.col", "corinthians.col", "ts.col", "sm.col", "id.col", "realmadrid.col", "panic.col", "es.col", "inithx.i.1.col", "inithx.i.2.col", "inithx.i.3.col", "latin_square_10.col", "jean.col", "le450_5a.col", "le450_5b.col", "le450_5c.col", "le450_5d.col", "le450_15a.col", "le450_15b.col", "le450_15c.col", "le450_15d.col", "le450_25a.col", "le450_25b.col", "le450_25c.col", "le450_25d.col", "miles250.col", "miles500.col", "miles750.col", "miles1000.col", "miles1500.col", "mulsol.i.1.col", "mulsol.i.2.col", "mulsol.i.3.col", "mulsol.i.4.col", "mulsol.i.5.col", "myciel2.col", "myciel3.col", "myciel4.col", "myciel5.col", "myciel6.col", "myciel7.col", "queen5_5.col", "queen6_6.col", "queen7_7.col", "queen8_8.col", "queen8_12.col", "queen9_9.col", "queen10_10.col", "queen11_11.col", "queen12_12.col", "queen13_13.col", "queen14_14.col", "queen15_15.col", "queen16_16.col", "school1.col", "school1_nsh.col", "zeroin.i.1.col", "zeroin.i.2.col", "zeroin.i.3.col"};
     out<<file_names[curr_idx];
     out<<" & "<<n_colors<<" & "<<tempo.count()<<" \\\\\n";
-    std::cout<<file_names[curr_idx];
+    std::cout<<file_names[curr_idx]<<" & "<<n_vertices<<" & "<<n_arestas;
     std::cout<<" & "<<n_colors<<" & "<<tempo.count()<<" \\\\\n";
 }
 
@@ -214,7 +214,7 @@ void Manager::display_solution(){
     // std::cout<<"Número de cores usadas: "<<n_colors<<std::endl;
     // out<<"Número de cores usadas: "<<n_colors<<std::endl;
 
-    std::cout<<problema_escolhido<<" & "<<n_vertices<<" & "<<n_arestas<<" & "<<n_colors<<" & "<<tempo.count()<<" \\\\\n";
+    // std::cout<<problema_escolhido<<" & "<<n_vertices<<" & "<<n_arestas<<" & "<<n_colors<<" & "<<tempo.count()<<" \\\\\n";
 };
 
 
@@ -453,7 +453,7 @@ void Manager::ColorZ(const std::vector<std::pair<int,std::vector<int>>>& G){
     }
 }
 
-void Manager::wa(double T, unsigned int L){
+void Manager::rs(double T, unsigned int L){
     albuquerque_wanderley();
     bool melhor_encontrado{true};
     auto melhor_solucao = solucao;

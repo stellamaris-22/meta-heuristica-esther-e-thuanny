@@ -28,5 +28,3 @@
 
 375 
 
-Tempo (em ms): 10
-Número de cores usadas: 15
