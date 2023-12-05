@@ -1,7 +1,7 @@
 # Trabalho de Projeto e Análise de  Algoritmos de Esther e Thuanny
 ## Proposta
 
-Propomos, neste trabalho, entregar uma implementação de um algoritmo exato utilizando algumas das técnicas aprendidas ao longo das aulas que resolva problemas de coloração de grafos, modelados especificamente para resolver o problema de timetabling. A técnica escolhida pelas autoras foi o BackTracking. Ele lê arquivos .col, que descrevem grafos, e gera uma tabela que aloque os recursos de modo a obedecer às restrições especificadas no problema. Assumimos, em particular, que os vértices são aulas e que as arestas são restrições - aulas que não podem ocorrer na mesma sala. Ao colorir este grafo, o resultado será uma tabela de salas e horários organizando cada aula em uma sala e horário. Cada cor será uma sala.
+Propomos, neste trabalho, entregar uma implementação de uma meta-heurística utilizando algumas das técnicas aprendidas ao longo das aulas que resolva problemas de coloração de grafos, modelados especificamente para resolver o problema de timetabling. A técnica escolhida pelas autoras foi o Simualted Annealing. Ele lê arquivos .col, que descrevem grafos, e gera uma tabela que aloque os recursos de modo a obedecer às restrições especificadas no problema. Assumimos, em particular, que os vértices são aulas e que as arestas são restrições - aulas que não podem ocorrer na mesma sala. Ao colorir este grafo, o resultado será uma tabela de salas e horários organizando cada aula em uma sala e horário. Cada cor será uma sala.
 
 ## Compilar
 
@@ -15,7 +15,7 @@ E, para executar,
 
 ## Testes
 
-Todos os casos de teste foram tirados de https://mat.tepper.cmu.edu/COLOR/instances.html; em particular, pegamos todos os testes de formato .col. Cada teste foi executado uma única vez na medição de tempo. Todos os arquivos com os testes podem ser encontrados em src/test_lib neste repositório. Para executar os testes, basta seguir os comandos dados ao executar o código como descrito acima. Os testes estão indexados na mesma ordem em que aparecem na pasta. Ao executar um teste, a solução, o tempo gasto e o número de cores utilizadas aparecerão na tela e em um novo arquivo chamado result.txt. Todos os testes que fizemos estão disponíveis neste repositório.
+Todos os casos de teste foram feitos a mão; em particular, pegamos todos os testes de formato .col. Cada teste foi executado uma única vez na medição de tempo. Todos os arquivos com os testes podem ser encontrados em src/test_lib neste repositório. Para executar os testes, basta seguir os comandos dados ao executar o código como descrito acima. Os testes estão indexados na mesma ordem em que aparecem na pasta. Ao executar um teste, a solução, o tempo gasto e o número de cores utilizadas aparecerão na tela e em um novo arquivo chamado result.txt. Todos os testes que fizemos estão disponíveis neste repositório.
 
 ## Saída
 
@@ -26,15 +26,15 @@ A saída será dada por uma sequência de linhas não-vazias. Cada linha represe
 Para a solução deste problema, lemos um grafo com arestas de restrição de um arquivo .col e, nele, executamos o novo algoritmo sugerido pelas autoras, gerando partições do conjunto de vértices. Cada vértice estará em exatamente uma partição, então todos os vértices estarão coloridos. Não haverá dois vértices adjacentes na mesma partição, garantindo que aulas que não podem ocorrer na mesma sala estarão em salas distintas. Ao fim, mostramos estas partições em cada linha.
 
 ## Relatório
-O relatório desse Projeto se encontra aqui: [Relatório do Projeto](RelatórioProjetoAnaliseAlgoritmos_AlgoritmoExato____Unidade_3.pdf). Nele, foi especificado o tipo do problema, apresentamos alguins algoritmos exatos que  são encontradoss na literatura, sugerimos uma outra solução, implementamos e comparamos com os resultados obtidos na implementação do algoritmo de Zykov.
+O relatório desse Projeto se encontra aqui: [Relatório do Projeto](https://www.overleaf.com/read/tmkgwrhnpnxr#e0c674). Nele, foi especificado o tipo do problema, apresentamos algumas meta-heurísticas que  são encontradas na literatura, sugerimos uma outra solução, implementamos e comparamos com os resultados dos trabalhos anteriores (heurística, algoritmo exato).
 
 
 ## Slides 
-Os slides de apresentação se encontram aqui: [Slides](https://www.canva.com/design/DAF0GEjCgcQ/Xtd2q-vUyLxAxfCLUq011Q/edit?utm_content=DAF0GEjCgcQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton).
+Os slides de apresentação se encontram aqui: [Slides](https://www.canva.com/design/DAF2CyWSVUA/yBk3PmxqwWBek90vzc85Ew/edit?utm_content=DAF2CyWSVUA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton).
 
 ## Vídeo
 
-O vídeo com a apresentação das autoras sobre o projeto se encontra aqui: [Vídeo](https://drive.google.com/file/d/1lUIavJJgSRRGATlbX3u_X1LKC9E5INi8/view?usp=drive_link).
+O vídeo com a apresentação das autoras sobre o projeto se encontra aqui: [Vídeo](https://drive.google.com/file/d/13JrcH5Vy7DjZARHfQ8mDG16LLCTzZTR8/view?usp=drive_link).
 
 ## Agradecimentos
 
